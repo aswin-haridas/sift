@@ -1,5 +1,6 @@
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import { useEffect } from "react";
 
 import useMemory from "@/core/store";
 
@@ -23,6 +24,13 @@ const EditorComponent = () => {
       setStory(html);
     },
   });
+
+  // This effect will update the editor content when the story changes in the store
+  useEffect(() => {
+    if (editor && editor.getHTML() !== story) {
+      editor.commands.setContent(story);
+    }
+  }, [story, editor]);
 
   return <EditorContent editor={editor} />;
 };

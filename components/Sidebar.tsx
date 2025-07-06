@@ -77,20 +77,31 @@ export const SideBar = (): ReactElement => {
       options: [
         {
           label: "Summarize",
-          action: () => {
-            if (story) summarize(story);
+          action: async () => {
+            if (story) {
+              const result = await summarize(story);
+              setStory(result);
+            }
           },
         },
         {
           label: "Expand",
-          action: () => {
-            if (story) expand(story);
+          action: async () => {
+            if (story) {
+              const result = await expand(story);
+              console.log(result);
+
+              setStory(result);
+            }
           },
         },
         {
           label: "Shorten",
-          action: () => {
-            if (story) shorten(story);
+          action: async () => {
+            if (story) {
+              const result = await shorten(story);
+              setStory(result);
+            }
           },
         },
       ],
